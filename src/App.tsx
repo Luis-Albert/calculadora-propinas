@@ -37,6 +37,12 @@ function App() {
           )}
         </div>
       </main>
+      <footer className="py-5 text-center lg:text-left w-full">
+        <div className=" p-4 text-center text-surface dark:text-white">
+          &copy;2024 {''}
+          <a href="#">Proyecto Personal Luis Huaman</a>
+        </div>
+      </footer>
     </>
   )
 }
