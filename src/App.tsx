@@ -1,12 +1,15 @@
-import MenuItem from './components/MenuItem'
-import OrderContents from './components/OrderContents'
-import OrderTotals from './components/OrderTotals'
-import TipPorcentageForm from './components/TipPorcentageForm'
-import { menuItems } from './data/db'
-import useOrder from './hooks/useOrder'
+import { useReducer } from "react"
+import MenuItem from "./components/MenuItem"
+import OrderContents from "./components/OrderContents"
+import OrderTotals from "./components/OrderTotals"
+import TipPorcentageForm from "./components/TipPorcentageForm"
+import { menuItems } from "./data/db"
+import useOrder from "./hooks/useOrder"
+import { orderReducer, initialState } from "./reducers/order-reducers"
 
 function App() {
   const { addItem, order, removeItem, tip, setTip, placeOrder } = useOrder()
+  const [state, dispatch] = useReducer(orderReducer, initialState)
   return (
     <>
       <header className="bg-teal-400 py-5">
@@ -20,7 +23,11 @@ function App() {
           <h2 className="text-4xl font-black">Menu</h2>
           <div className="space-y-3 mt-10">
             {menuItems.map((item) => (
-              <MenuItem key={item.id} item={item} addItem={addItem} />
+              <MenuItem
+                key={item.id}
+                item={item}
+                dispatch={dispatch}
+              />
             ))}
           </div>
         </div>
@@ -39,7 +46,7 @@ function App() {
       </main>
       <footer className="py-5 text-center lg:text-left w-full">
         <div className=" p-4 text-center text-surface dark:text-white">
-          &copy;2024 {''}
+          &copy;2024 {""}
           <a href="#">Proyecto Personal Luis Huaman</a>
         </div>
       </footer>
